@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Text Converter Settings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 400px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            margin: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #e1e8ed;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            display: none;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .shortcut-info {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .shortcut-info strong {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ AI Text Converter</h1>
+
+        <div class="form-group">
+            <label for="aiProvider">AI Provider</label>
+            <select id="aiProvider">
+                <option value="openai">OpenAI (GPT-4, GPT-3.5)</option>
+                <option value="deepseek">DeepSeek</option>
+                <option value="mistral">Mistral AI</option>
+                <option value="qwen">Qwen (Alibaba Cloud)</option>
+                <option value="ollama">Ollama (Local)</option>
+                <option value="anthropic">Anthropic (Claude)</option>
+                <option value="groq">Groq</option>
+            </select>
+            <div class="help-text">Choose your preferred AI service</div>
+        </div>
+
+        <div class="form-group">
+            <label for="apiKey">API Key</label>
+            <input type="password" id="apiKey" placeholder="Enter your API key">
+            <div class="help-text">Your key is encrypted and stored locally</div>
+        </div>
+
+        <div class="form-group">
+            <label for="model">Model (Optional)</label>
+            <input type="text" id="model" placeholder="e.g., gpt-4, llama3">
+            <div class="help-text">Leave empty for default model</div>
+        </div>
+
+        <div class="form-group">
+            <label for="customPrompt">Custom Prompt Template</label>
+            <input type="text" id="customPrompt" placeholder="Convert to bullet points: {text}">
+            <div class="help-text">Use {text} as placeholder for selected text</div>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-primary" id="saveBtn">Save Settings</button>
+            <button class="btn-secondary" id="testBtn">Test API</button>
+        </div>
+
+        <div class="status" id="status"></div>
+
+        <div class="shortcut-info">
+            <strong>Keyboard Shortcut:</strong> Ctrl+Shift+B (Cmd+Shift+B on Mac)<br>
+            Select text and press the shortcut to convert!
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
